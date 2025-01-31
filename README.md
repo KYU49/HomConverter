@@ -59,7 +59,7 @@ print(result$symbol)     # `[1] "RPL36A"`
 ```R
 result <- conv$mouse2human(0) # Not existing EntrezGeneID
 print(result$entrezGeneId)    # `[1] NA`
-print(result$symbol)          # `[1] "NA"`. Attention: "NA" is text not NA.
+print(result$symbol)          # `[1] NA`
 ```
 
 

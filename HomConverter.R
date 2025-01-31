@@ -39,7 +39,7 @@ HomConverter <- setRefClass(
         converter = function(fromDB, toDB, id, allow_multiple_hit){
             if(length(id) > 1){
                 return(
-                    c(
+                    list(
                         entrezGeneId = lapply(id, function(id){
                             converter(fromDB, toDB, id, allow_multiple_hit)$entrezGeneId
                         }),
@@ -49,7 +49,7 @@ HomConverter <- setRefClass(
                     )
                 )
             }
-            notFouond <- c(entrezGeneId = NA_integer_, symbol = NA)
+            notFouond <- list(entrezGeneId = NA_integer_, symbol = NA)
             classKey <- fromDB[fromDB$EntrezGene.ID == id, "DB.Class.Key"]
             if(length(classKey) == 0) {
                 return(notFouond)
@@ -61,14 +61,14 @@ HomConverter <- setRefClass(
 
             if(allow_multiple_hit){
                 return(
-                    c(
+                    list(
                         entrezGeneId = results$EntrezGene.ID,
                         symbol = results$Symbol
                     )
                 )
             }
             return(
-                c(
+                list(
                     entrezGeneId = results$EntrezGene.ID[1],
                     symbol = results$Symbol[1]
                 )
