@@ -55,5 +55,13 @@ result <- conv$mouse2human(66483)
 print(result$symbol)     # `[1] "RPL36A"`
 ```
 
+## When corresponding gene is not found
+```R
+result <- conv$mouse2human(0) # Not existing EntrezGeneID
+print(result$entrezGeneId)    # `[1] NA`
+print(result$symbol)          # `[1] "NA"`. Attention: "NA" is text not NA.
+```
+
+
 # License
 This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
