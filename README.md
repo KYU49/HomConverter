@@ -36,7 +36,7 @@ print(reulst$symbol)
 ## Convert list of EntrezGeneIDs from Mouse to Human
 ```R
 result <- conv$mouse2human(c(id1, id2, id3, ...))
-print(result[[1]]$entrezGeneId) # EntrezGeneID of Human converted from id1
+print(result$entrezGeneId[1]) # EntrezGeneID of Human converted from id1
 ```
 
 ## Not 1:1 but 1:many convert

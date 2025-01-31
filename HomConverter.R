@@ -37,6 +37,18 @@ HomConverter <- setRefClass(
             humanDB <<- m2h[m2h$NCBI.Taxon.ID == 9606, c("DB.Class.Key", "EntrezGene.ID", "Symbol")]
         },
         converter = function(fromDB, toDB, id, allow_multiple_hit){
+            if(length(id) > 1){
+                return(
+                    list(
+                        entrezGeneId = lapply(id, function(id){
+                            converter(fromDB, toDB, id, allow_multiple_hit)$entrezGeneId
+                        }),
+                        symbol = lapply(id, function(id){
+                            converter(fromDB, toDB, id, allow_multiple_hit)$symbol
+                        })
+                    )
+                )
+            }
             notFouond <- list(entrezGeneId = NA_integer_, symbol = "NA")
             classKey <- fromDB[fromDB$EntrezGene.ID == id, "DB.Class.Key"]
             if(length(classKey) == 0) {
@@ -63,23 +75,9 @@ HomConverter <- setRefClass(
             )
         },
         mouse2human = function(mouseEntrezId, allow_multiple_hit = FALSE){
-            if(length(mouseEntrezId) > 1){
-                return(
-                    lapply(mouseEntrezId, function(id) {
-                        converter(mouseDB, humanDB, id, allow_multiple_hit)
-                    })
-                )
-            }
             return(converter(mouseDB, humanDB, mouseEntrezId, allow_multiple_hit))
         },
         human2mouse = function(humanEntrezId, allow_multiple_hit = FALSE){
-            if(length(mouseEntrezId) > 1){
-                return(
-                    lapply(humanEntrezId, function(id) {
-                        converter(humanDB, mouseDB, id, allow_multiple_hit)
-                    })
-                )
-            }
             return(converter(humanDB, mouseDB, humanEntrezId, allow_multiple_hit))
         }
     )
