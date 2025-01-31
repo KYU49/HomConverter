@@ -40,10 +40,10 @@ HomConverter <- setRefClass(
             if(length(id) > 1){
                 return(
                     list(
-                        entrezGeneId = lapply(id, function(id){
+                        entrezGeneId = sapply(id, function(id){
                             converter(fromDB, toDB, id, allow_multiple_hit)$entrezGeneId
                         }),
-                        symbol = lapply(id, function(id){
+                        symbol = sapply(id, function(id){
                             converter(fromDB, toDB, id, allow_multiple_hit)$symbol
                         })
                     )
