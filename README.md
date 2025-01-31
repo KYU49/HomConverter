@@ -41,7 +41,7 @@ print(result[[1]]$entrezGeneId) # EntrezGeneID of Human converted from id1
 
 ## Not 1:1 but 1:many convert
 
-### `66483` is EntrezGeneID for the mouse gene Rpl36al, while in humans, it corresponds to the gene RPL36A and RPL36AL.
+* `66483` is EntrezGeneID for the mouse gene Rpl36al, while in humans, it corresponds to the gene RPL36A and RPL36AL.
 ```R
 result <- conv$mouse2human(66483, allow_multiple_hit = TRUE)
 print(result$symbol)        # `[1] "RPL36A"  "RPL36AL"`
@@ -49,7 +49,7 @@ print(result$entrezGeneId)  # `[1] 6173 6166`
 print(result$symbol[1])     # `[1] "RPL36A"`
 ```
 
-### If `allow_multiple_hit` is FALSE (default), the first one that is found will be returned as the output.
+* If `allow_multiple_hit` is FALSE (default), the first one that is found will be returned as the output.
 ```R
 result <- conv$mouse2human(66483)
 print(result$symbol)     # `[1] "RPL36A"`
